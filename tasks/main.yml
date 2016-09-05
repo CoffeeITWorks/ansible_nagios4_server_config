@@ -1,0 +1,44 @@
+---
+# file: tasks/main.yml
+
+- include: multi_os.yml
+  tags:
+    - config_nagios
+    - nagios_server_main_config
+
+# Actually these are fixed variables, if required some of these will be moved to defaults/main.yml to allow to overwrite
+# from hosts/groups vars.
+- name: Include nagios server Variables
+  include_vars: nagios_vars.yml
+  tags:
+    - config_nagios
+    - nagios_server_main_config
+
+# Installs packages in any platform and adds environment DEBIAN_FRONTEND for debian based os.
+# DEBIAN_FRONTEND helps on ensuring not interactive in this case.
+- stat: path="{{ nagios_config_file }}"
+  register: nagiosconfigfile
+
+- name: main | update apt cache for ubuntu
+  apt: update_cache=yes
+  when: ansible_distribution == 'Ubuntu' and not nagiosconfigfile.stat.exists
+
+- name: main | install packages
+  package: name={{ nagios_packages| join(',') }} state=present
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- include: config_main_nagios.yml
+
+# For generic operation
+- include: config_nagios.yml
+  tags:
+    - config_nagios
+
+- include: config_nsca.yml
+
+- include: nagios_cron.yml
+  tags:
+    - config_nagios_cron
+
+- include: config_notifications.yml

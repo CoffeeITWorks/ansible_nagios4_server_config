@@ -1,0 +1,35 @@
+#::::::::::::::
+# Ubuntu.yml
+#::::::::::::::
+---
+
+nagios_packages:
+  - nsca
+  - python-passlib  # Required for the htpasswd Ansible module
+  - nagios-nrpe-plugin
+  - libswitch-perl
+  - rrdtool
+  - librrds-perl
+  - php5-gd
+  - libwww-perl
+  - libjson-perl
+  - nagios-plugins-extra
+  - nagios-plugins-contrib
+  - nagios-plugin-check-multi
+  - libsys-statistics-linux-perl # For check_linux_stats.pl
+
+sudoers_file: '/etc/sudoers'
+
+nagios_etc: '/usr/local/nagios/etc'
+nagios_config_cfg_dir: "{{ nagios_etc }}/conf.d"
+nagios_plugins_dir: '/usr/lib/nagios/plugins/'
+
+nagios_version: 4
+nagios_service: nagios
+nagios_config_file: "{{ nagios_etc }}/nagios.cfg"
+nagios_cgi_file: "{{ nagios_etc }}/cgi.cfg"
+nsca_config_file: /etc/nsca.cfg
+nsca_service: nsca
+npcd_service: npcd
+
+nagios_config_command_file: /usr/local/nagios/var/rw/nagios.cmd

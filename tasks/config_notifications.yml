@@ -1,0 +1,12 @@
+---
+# file: task/config_notifications.yml
+
+# This is also replaced by nagios4_server_pnp4nagios
+
+- name: Configure Notification command
+  template:
+    src: 'generic-notifications.cfg.j2'
+    dest: '{{ nagios_config_cfg_dir }}/generic-notifications.cfg'
+    owner: 'root'
+    group: 'root'
+    mode: 644

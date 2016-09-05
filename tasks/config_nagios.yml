@@ -1,0 +1,68 @@
+---
+# file: tasks/config_nagios.yml
+
+# Only config for normal operation
+
+- name: Clone configuration directories (Git)
+  git:  repo="{{ item.repo }}"
+        dest="{{ nagios_config_cfg_dir }}/{{ item.dir }}"
+        version="{{ item.version }}"
+        update=yes
+        force=yes
+  with_items: '{{ nagios_config_cfg_dirs_git }}'
+  when: nagios_config_cfg_dirs_git
+  notify: Reload Nagios
+
+- name: Clone configuration directories (Git)
+  git:  repo="{{ item.repo }}"
+        dest="{{ nagios_config_cfg_dir }}/{{ item.dir }}"
+        version="{{ item.version }}"
+        update=yes
+        force=yes
+        accept_hostkey=yes
+        key_file=keys/nagios_key_rsa
+  with_items: '{{ nagios_config_cfg_dirs_git_rsa }}'
+  when: nagios_config_cfg_dirs_git_rsa
+  notify: Reload Nagios
+
+- name: Allow icmp to run with nagios user
+  file: 'path=/usr/lib/nagios/plugins/check_icmp mode="u+rws,g+rx,o+rx"'
+  notify: Reload Nagios
+
+- name: Configure Generic Nagios stuff
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  with_items:
+    - { src: 'extra-commands.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/extra-commands.cfg' }
+    - { src: 'generic-commands.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-commands.cfg' }
+    - { src: 'localhost_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/localhost_nagios.cfg' }
+    - { src: 'hostgroups_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/hostgroups_nagios.cfg' }
+    - { src: 'services_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/services_nagios.cfg' }
+    - { src: 'generic-host_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-host_nagios.cfg' }  # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'generic-service_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-service_nagios.cfg' } # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'templates.cfg.j2', dest: '{{ nagios_etc }}/objects/templates.cfg' }
+    - { src: 'resource.cfg.j2', dest: '{{ nagios_etc }}/resource.cfg' } # To change $USER1$ path
+  notify: Reload Nagios
+
+- name: Configure Generic Nagios stuff
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  with_items:
+    - { src: 'cgi.cfg.j2', dest: '{{ nagios_etc }}/cgi.cfg' } # Modify permissions and other web options
+  notify: Reload Apache
+
+- name: create commands_core dir
+  file: 'path={{ nagios_config_cfg_dir }}/commands_core owner=root group=root mode=755 state=directory'
+
+- name: config_nagios | copy commands to commands_core
+  copy: src={{ item }} dest="{{ nagios_config_cfg_dir }}/commands_core" owner=www-data mode=655
+  with_fileglob:
+  - "commands/*"

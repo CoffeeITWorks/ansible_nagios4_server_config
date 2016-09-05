@@ -1,0 +1,40 @@
+define service {
+    host_name               localhost
+    service_description     Check if Apache2 is running
+    check_command           check_linux_process_local!314572800!536870912!/var/run/apache2/apache2.pid
+    use                     generic-service
+}
+
+define service {
+    host_name               localhost
+    service_description     Check if Nagios is running
+    check_command           check_linux_process_local!1610612736!2147483648!/usr/local/nagios/var/nagios.lock
+    notes                   Warn if nagios uses 1.5Gb of RAM.
+    use                     generic-service
+}
+
+# Define a service to check the disk space of the root partition
+# on the local machine.  Warning if < 20% free, critical if
+# < 10% free space on partition.
+
+define service{
+        use                             generic-service         ; Name of service template to use
+        host_name                       localhost
+        service_description             Disk Space
+        check_command                   check_all_disks!20%!10%
+        }
+
+
+
+# Define a service to check the number of currently logged in
+# users on the local machine.  Warning if > 20 users, critical
+# if > 50 users.
+
+# Check logrotation for nagios service
+define service{
+        use                             generic-service
+        host_name                       localhost
+        service_description             Check nagios log rotation
+        check_command                   check_file_age_local!/usr/local/nagios/var/archives!90000!180000
+        notes                           Verify if /usr/local/nagios/var/archives is rotated to archives, move it if required (stopping nagios first)
+}

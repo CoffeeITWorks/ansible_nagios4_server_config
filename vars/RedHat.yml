@@ -1,0 +1,42 @@
+#::::::::::::::
+# Redhat.yml
+#::::::::::::::
+---
+
+nagios_packages:
+  - httpd
+  - nagios
+  - nagios-plugins-all
+  - nagios-common
+  - nagios-devel
+  - libselinux-python
+  - nsca # requires epel
+  - python-passlib  # Required for the htpasswd Ansible module
+  - rrdtool
+  - php-gd
+  - perl-libwww-perl
+  - perl-json
+  - php
+  - php-xml
+  - php-mysql
+  - libsys-statistics-linux-perl # For check_linux_stats.pl
+#  - apache2-mpm-prefork
+#  - nagios-doc
+#  - nagios-nrpe-plugin
+#  - libswitch-perl
+#  - librrds-perl
+
+sudoers_file: '/etc/sudoers'
+
+nagios_etc: '/etc/nagios'
+nagios_config_cfg_dir: "{{ nagios_etc }}/objects"
+
+# --- still requires work:
+nagios_version: 3
+nagios_service: nagios3
+nagios_config_file: /etc/nagios/nagios.cfg
+nagios_cgi_file: /etc/nagios/cgi.cfg
+nsca_config_file: /etc/nsca.cfg
+nsca_service: nsca
+
+nagios_config_command_file: /usr/local/nagios/var/rw/nagios.cmd

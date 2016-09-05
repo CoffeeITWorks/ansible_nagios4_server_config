@@ -1,0 +1,25 @@
+---
+
+
+# Configuration repositories, defined in host vars file
+nagios_config_cfg_dirs_git: false
+nagios_config_cfg_dirs_git_rsa: false
+
+# Extra Nagios configuration options
+nagios_config_enable_notifications: 1
+
+nagios_cgi_authorized_for_system_information: nagiosadmin
+nagios_cgi_authorized_for_configuration_information: nagiosadmin
+nagios_cgi_authorized_for_system_commands: nagiosadmin
+nagios_cgi_authorized_for_all_services: nagiosadmin
+nagios_cgi_authorized_for_all_hosts: nagiosadmin
+nagios_cgi_authorized_for_all_service_commands: nagiosadmin
+nagios_cgi_authorized_for_all_host_commands: nagiosadmin
+nagios_cgi_authorized_for_read_only: False
+
+# Default proxy_env
+
+proxy_env:
+  http_proxy: ''
+  https_proxy: ''
+  ftp_proxy: ''

@@ -1,0 +1,94 @@
+# some other generic-commands to add here.
+# define command {
+#        command_name    commandx
+#        command_line    $USER1$/plugin -H '$HOSTADDRESS$'  -c 60% -w 20%
+#}
+###                                         ---                                                                      ###
+
+define command{
+    command_name    check_linux_process_local
+    command_line    sudo /usr/lib/nagios/plugins/check_linux_stats.pl -T -w $ARG1$ -c $ARG2$ -p $ARG3$
+}
+
+define command{
+    command_name    check_linux_process
+    command_line    /usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c check_linux_process -a $ARG1$ $ARG2$ $ARG3$
+}
+
+
+#Check for HTTP with custom Port
+define command{
+	command_name	check_http_custom
+	command_line	/usr/lib/nagios/plugins/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$ -p $ARG1$
+}
+
+#Check VNC service
+define command{
+	command_name	check_tcp_vnc
+	command_line	/usr/lib/nagios/plugins/check_tcp -H $HOSTADDRESS$ -p 5900
+}
+
+#Check port
+define command{
+	command_name	check_port
+	command_line	/usr/bin/perl /usr/lib/nagios/plugins/check_port.pl -p $ARG1$ -H $HOSTADDRESS$ -c 5 -w 2
+}
+
+#Check custom host alive
+define command{
+	command_name	custom-host-alive
+	command_line	/usr/lib/nagios/plugins/check_ping -H $HOSTADDRESS$ -w 5000,20% -c 5000,100% -p 4
+}
+
+define command{
+	command_name	check_ftp_custom
+	command_line	/usr/lib/nagios/plugins/check_ftp -H $HOSTADDRESS$ -p $ARG1$
+}
+
+#CHECK CONSUM CARTDRIGE FOR PRINTERS
+define command{
+	command_name	check_printer_model
+	command_line	/usr/lib/nagios/plugins/check_snmp_printer $HOSTADDRESS$ public MODEL
+}
+
+#CHECK CONSUM CARTDRIGE FOR PRINTERS
+define command{
+	command_name	check_printer_cartdrige
+	command_line	/usr/lib/nagios/plugins/check_snmp_printer $HOSTADDRESS$ public CONSUM ALL
+}
+
+##SNMP GET FOR SOME SNMP VARIABLES
+define command{
+	command_name	check_snmpget
+	command_line	/usr/bin/snmpget -v 2c -c $ARG1$ $HOSTADDRESS$ $ARG2$
+}
+
+define command{
+	command_name	check_mrtg_service
+	command_line    /usr/lib/nagios/plugins/check_procs -w 1:1 -a '/usr/bin/mrtg' -u root
+}
+
+define command{
+	command_name	check_url_status
+	command_line	/usr/lib/nagios/plugins/check_http -I $HOSTADDRESS$ -p $ARG1$
+}
+
+# 'check_https' command definition
+#Usage check_command  check_https_url!FQDN!/path/to/file
+define command{
+	command_name    check_https_url
+	command_line    /usr/lib/nagios/plugins/check_http --ssl -H '$ARG1$' -u '$ARG2$'
+}
+
+# check_http_url - check for any give $ARG2$ /url/to/get
+define command{
+	command_name    check_http_url
+	command_line    /usr/lib/nagios/plugins/check_http -H '$ARG1$' -u '$ARG2$'
+}
+
+# Check file age local
+# Usage: check_file_age_local!path!seconds_warn!seconds_crit
+define command{
+	command_name	check_file_age_local
+	command_line	/usr/lib/nagios/plugins/check_file_age -w $ARG2$ -c $ARG3$ -f $ARG1$
+}

@@ -1,0 +1,14 @@
+---
+# file: tasks/nagios_cron.yml
+
+### CRON CONFIGURATION ###
+
+# Due to some issue with check_mk, we use to ensure nagios didn't crash after rotating live_mk
+- cron: name='start nagios service'
+        job='service nagios3 start >>/var/log/nagios_cron.log 2>&1'
+        user='root'
+        cron_file='nagios_cron'
+        weekday='*'
+        hour='0'
+        minute='1'
+  when: ansible_distribution == 'Ubuntu'

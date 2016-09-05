@@ -1,0 +1,6 @@
+# It requires task Allow icmp to run with nagios user from config_plugins.yml
+define command {
+        command_name    check_icmp
+        command_line    $USER1$/check_icmp -H '$HOSTADDRESS$'  -c 600,60% -w 500,20%
+}
+###                                         ---                                                                      ###
