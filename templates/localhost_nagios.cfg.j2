@@ -8,8 +8,8 @@ define service {
 define service {
     host_name               localhost
     service_description     Check if Nagios is running
-    check_command           check_linux_process_local!1610612736!2147483648!/usr/local/nagios/var/nagios.lock
-    notes                   Warn if nagios uses 1.5Gb of RAM.
+    check_command           check_linux_process_local!2147483648!2684354560!/usr/local/nagios/var/nagios.lock
+    notes                   Warn if nagios uses 2Gb of RAM. CRIT 2.5Gb of RAM
     use                     generic-service
 }
 
