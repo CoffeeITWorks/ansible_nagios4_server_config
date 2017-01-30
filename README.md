@@ -29,13 +29,13 @@ nagios_cgi_authorized_for_read_only: user1, user2
 
 Or change the permissions specified: 
 
-nagios_cgi_authorized_for_system_information: nagiosadmin
-nagios_cgi_authorized_for_configuration_information: nagiosadmin
-nagios_cgi_authorized_for_system_commands: nagiosadmin
-nagios_cgi_authorized_for_all_services: nagiosadmin,user1,user2
-nagios_cgi_authorized_for_all_hosts: nagiosadmin,user1,user2
-nagios_cgi_authorized_for_all_service_commands: nagiosadmin
-nagios_cgi_authorized_for_all_host_commands: nagiosadmin
+    nagios_cgi_authorized_for_system_information: nagiosadmin
+    nagios_cgi_authorized_for_configuration_information: nagiosadmin
+    nagios_cgi_authorized_for_system_commands: nagiosadmin
+    nagios_cgi_authorized_for_all_services: nagiosadmin,user1,user2
+    nagios_cgi_authorized_for_all_hosts: nagiosadmin,user1,user2
+    nagios_cgi_authorized_for_all_service_commands: nagiosadmin
+    nagios_cgi_authorized_for_all_host_commands: nagiosadmin
 
 *Disable notifications on hosts not required using host_vars/hostname*
 
@@ -77,10 +77,7 @@ Then generate the keys and save as nagios_key_rsa
 
 When nagios_config_cfg_dirs_git_rsa var exists, the role will look for /home/remoteuser/keys/nagios_key_rsa to use it. 
 
-### Other optional variables:
 
-    nagios_config_welcome: 'Nagios Monitoring'
-    nagios_config_sender: 'nagios@email'
 
 Dependencies
 ------------
@@ -90,12 +87,7 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 Example Playbook
 ----------------
 
-Minimum usage:
 
-    - hosts: servers
-      roles:
-        - ANXS.mysql
-        - nagios4_server
 
 ### Full list of roles:
 

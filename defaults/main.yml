@@ -17,6 +17,11 @@ nagios_cgi_authorized_for_all_service_commands: nagiosadmin
 nagios_cgi_authorized_for_all_host_commands: nagiosadmin
 nagios_cgi_authorized_for_read_only: False
 
+
+nagios_config_cfg_dirs_git: []
+nagios_config_cfg_dirs_git_rsa: []
+
+
 # Default proxy_env
 
 proxy_env:
