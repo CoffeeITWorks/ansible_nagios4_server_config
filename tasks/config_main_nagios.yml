@@ -4,12 +4,15 @@
 - name: config_main_nagios | ensure conf.d exists
   file: path="{{ nagios_config_cfg_dir }}" state='directory' mode='775' owner='nagios' group='nagios'
 
+- name: config_main_nagios | ensure conf.d/nagios-plugins does not exists
+  file: path="{{ nagios_config_cfg_dir }}/nagios-plugins" state='absent'
+
 # copy commands for debian based distro
-- name: config_main_nagios | ensure conf.d/nagios-plugins exists
-  file: path="{{ nagios_config_cfg_dir }}/nagios-plugins" state='directory' mode='775' owner='nagios' group='nagios'
+- name: config_main_nagios | ensure conf.d/plugins exists
+  file: path="{{ nagios_config_cfg_dir }}/plugins" state='directory' mode='775' owner='nagios' group='nagios'
   
-- name: config_main_nagios | copy nagios-plugins-cfg
-  copy: src="{{ item }}" dest="{{ nagios_config_cfg_dir }}/nagios-plugins" owner=nagios group=nagios mode=655
+- name: config_main_nagios | copy plugins-cfg
+  copy: src="{{ item }}" dest="{{ nagios_config_cfg_dir }}/plugins" owner=nagios group=nagios mode=655
   with_fileglob:
   - "nagios-plugins-cfg/*"
   
