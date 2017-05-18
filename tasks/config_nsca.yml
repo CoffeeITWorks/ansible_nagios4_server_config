@@ -15,3 +15,9 @@
         owner=root group=root mode=0644
         backup=yes
   notify: Reload NSCA
+
+- name: Ensure nsca is started and enabled
+  service:
+    name: "{{ nsca_service }}"
+    state: started
+    enabled: yes

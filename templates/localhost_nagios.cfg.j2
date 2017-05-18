@@ -13,6 +13,13 @@ define service {
     use                     generic-service
 }
 
+define service {
+    host_name               localhost
+    service_description     check_nsca_service_running
+    check_command           check_linux_process_local!314572800!536870912!/var/run/nsca.pid
+    use                     generic-service
+}
+
 # Define a service to check the disk space of the root partition
 # on the local machine.  Warning if < 20% free, critical if
 # < 10% free space on partition.
