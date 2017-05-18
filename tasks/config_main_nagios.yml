@@ -48,6 +48,11 @@
   - { src: "^free_child_process_memory=" , value: "free_child_process_memory={{ nagios_config_free_child_process_memory }}" }
   - { src: "^log_rotation_method=" , value: "log_rotation_method={{ nagios_config_log_rotation_method }}" }
   - { src: "^cfg_dir={{ nagios_config_cfg_dir }}", value: "cfg_dir={{ nagios_config_cfg_dir }}" }
+  - { src: "^cached_host_check_horizon={{ nagios_cached_host_check_horizon }}", value: "cached_host_check_horizon={{ nagios_cached_host_check_horizon }}" }
+  - { src: "^cached_service_check_horizon={{ nagios_cached_service_check_horizon }}", value: "cached_service_check_horizon={{ nagios_cached_service_check_horizon }}" }
+  - { src: "^check_service_freshness={{ nagios_check_service_freshness }}", value: "check_service_freshness={{ nagios_check_service_freshness }}" }
+  - src: "^allow_empty_hostgroup_assignment={{ nagios_allow_empty_hostgroup_assignment }}"
+    value: "allow_empty_hostgroup_assignment={{ nagios_allow_empty_hostgroup_assignment }}" 
   notify: Restart Nagios
   tags:
     - nagios_server_main_config

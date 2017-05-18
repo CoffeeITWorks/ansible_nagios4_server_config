@@ -24,3 +24,107 @@ proxy_env:
   http_proxy: ''
   https_proxy: ''
   ftp_proxy: ''
+
+# Standard Nagios configuration options
+
+nagios_config_status_update_interval: 20
+nagios_config_nagios_user: nagios
+nagios_config_nagios_group: nagios
+nagios_config_check_external_commands: 1    # Nagios default configuration = 1
+nagios_config_use_syslog: 0
+nagios_config_log_notifications: 1
+nagios_config_log_initial_states: 1         # Nagios default
+nagios_config_log_external_commands: 1
+nagios_config_enable_flap_detection: 1
+nagios_config_service_inter_check_delay_method: s
+nagios_config_max_concurrent_checks: 300
+nagios_config_retain_state_information: 1
+nagios_config_use_retained_scheduling_info: 1
+nagios_config_interval_length: 60
+nagios_config_check_for_updates: 0
+nagios_config_process_performance_data: 1
+nagios_config_use_regexp_matching: 0
+nagios_config_admin_email: root@localhost
+nagios_config_admin_pager: pageroot@localhost
+nagios_config_log_rotation_method: h
+nagios_cached_host_check_horizon: 30
+nagios_cached_service_check_horizon: 30
+nagios_check_service_freshness: 0
+nagios_allow_empty_hostgroup_assignment: 1
+
+# Performance:
+nagios_config_use_large_installation_tweaks: 1
+nagios_config_enable_environment_macros: 1 # required for  pnp4n_send_service_mail.pl but possible instability with check-mk-livestatus
+
+nagios_config_free_child_process_memory: 1
+#nagios_config_child_processes_fork_twice: 1
+
+
+# Standard NSCA configuration options
+nsca_config_log_facility: daemon
+nsca_config_check_result_path: False
+nsca_config_pid_file: /var/run/nsca.pid
+nsca_config_server_port: 5667
+nsca_config_server_address: False
+nsca_config_nsca_user: nagios
+nsca_config_nsca_group: nogroup
+nsca_config_nsca_chroot: False
+nsca_config_debug: 0
+nsca_config_command_file: "{{ nagios_config_command_file }}"
+nsca_config_alternate_dump_file: /var/run/nagios/nsca.dump
+nsca_config_aggregate_writes: 0
+nsca_config_append_to_file: 0
+nsca_config_max_packet_age: 30
+nsca_config_password: False
+nsca_config_decryption_method: 1
+
+# Not required for normal nagios without pnp or check-mk
+#nagios_config_host_perfdata_file_processing_command: process-host-perfdata-file
+#nagios_config_service_perfdata_file_processing_command: process-service-perfdata-file
+#nagios_config_global_host_event_handler: somecommand
+#nagios_config_global_service_event_handler: somecommand
+#nagios_config_broker_module: /somewhere/module2.o arg1 arg2=3 debug=0
+nagios_config_host_perfdata_file_processing_interval: false
+nagios_config_service_perfdata_file_processing_interval: false
+# nagios_config_host_perfdata_file_template: DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
+# nagios_config_service_perfdata_file_template: DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$
+
+# Standard CGI configuration options
+nagios_cgi_show_context_help: 1
+nagios_cgi_use_pending_states: 1
+nagios_cgi_statusmap_background_image: False
+# DEFAULT STATUSMAP LAYOUT METHOD
+# This option allows you to specify the default layout method
+# the statusmap CGI should use for drawing hosts.  If you do
+# not use this option, the default is to use user-defined
+# coordinates.  Valid options are as follows:
+#	0 = User-defined coordinates
+#	1 = Depth layers
+#       2 = Collapsed tree
+#       3 = Balanced tree
+#       4 = Circular
+#       5 = Circular (Marked Up)
+nagios_cgi_default_statusmap_layout: 4
+nagios_cgi_refresh_rate: 90
+nagios_cgi_result_limit: 100
+# ESCAPE HTML TAGS
+# This option determines whether HTML tags in host and service
+# status output is escaped in the web interface.  If enabled,
+# your plugin output will not be able to contain clickable links.
+nagios_cgi_escape_html_tags: 1
+nagios_cgi_host_unreachable_sound: False
+nagios_cgi_host_down_sound: False
+nagios_cgi_service_critical_sound: False
+nagios_cgi_service_warning_sound: False
+nagios_cgi_service_unknown_sound: False
+nagios_cgi_normal_sound: False
+
+# Apache configuration options
+nagios_a2_config: True      # Set to False to not configure Apache
+nagios_a2_vhost_file: 00-nagios.conf
+nagios_a2_http_port: 80
+nagios_a2_https_port: 443
+nagios_a2_server_name: "{{ ansible_fqdn }}"
+nagios_a2_server_admin: root@localhost
+nagios_a2_ssl_cert_file: /etc/ssl/certs/ssl-cert-snakeoil.pem
+nagios_a2_ssl_cert_keyfile: /etc/ssl/private/ssl-cert-snakeoil.key
