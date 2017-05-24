@@ -5,6 +5,11 @@
 nagios_config_cfg_dirs_git: []
 nagios_config_cfg_dirs_git_rsa: []
 
+# Configure notification command
+# disable this when you use pnp4nagios ansible role that changes the notification commands
+nagios_config_configure_notifications_command: True
+nagios_config_configure_generic_host_service: True
+
 # Extra Nagios configuration options
 nagios_config_enable_notifications: 1
 
