@@ -45,3 +45,12 @@ define service{
         check_command                   check_file_age_local!/usr/local/nagios/var/archives!90000!180000
         notes                           Verify if /usr/local/nagios/var/archives is rotated to archives, move it if required (stopping nagios first)
 }
+
+# Check if nagios_command is present
+define service{
+        use                             generic-service
+        host_name                       localhost
+        service_description             check_local_nagios_command
+        check_command                   check_file_age_local!{{ nsca_config_command_file }}!600/1200
+        notes                           Check if nagios command is available, restart nagios if it is not
+}
