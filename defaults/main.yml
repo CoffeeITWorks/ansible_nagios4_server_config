@@ -68,6 +68,12 @@ nagios_config_status_update_interval: 120
 nagios_service_freshness_check_interval: 120
 nagios_host_freshness_check_interval: 120
 
+nagios_config_perf_options:
+  - key: check_result_reaper_frequency
+    value: 3
+  - key: max_check_result_reaper_time
+    value: 10
+
 # Standard NSCA configuration options
 nsca_config_log_facility: daemon
 nsca_config_check_result_path: False
