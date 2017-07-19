@@ -3,12 +3,14 @@
 
 ### CRON CONFIGURATION ###
 
-# Due to some issue with check_mk, we use to ensure nagios didn't crash after rotating live_mk
-- cron: name='start nagios service'
-        job='service nagios3 start >>/var/log/nagios_cron.log 2>&1'
-        user='root'
-        cron_file='nagios_cron'
-        weekday='*'
-        hour='0'
-        minute='1'
-  when: ansible_distribution == 'Ubuntu'
+- name:  "nagios_cron | gzip nagios archive files older than {{ nagios_config_gzip_archives_days }}"
+  cron: 
+    name: "gzip archive files old"
+    job: "find {{ nagios_config_archives_dir }} -name *.log -mtime +{{ nagios_config_gzip_archives_days }} -execdir gzip {} +"
+    user: root
+    cron_file: "nagios_cron"
+    weekday: "*"
+    hour: "1"
+    minute: "1"
+    state: present
+  when: nagios_config_gzip_archives

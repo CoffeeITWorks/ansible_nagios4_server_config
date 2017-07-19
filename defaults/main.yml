@@ -22,6 +22,12 @@ nagios_cgi_authorized_for_all_service_commands: nagiosadmin
 nagios_cgi_authorized_for_all_host_commands: nagiosadmin
 nagios_cgi_authorized_for_read_only: False
 
+# Cron customized settings
+# will execute tasks/nagios_cron.yml task to enable daily compress of {{ nagios_config_archives_dir }}
+# This will free lot of RAM Memory usage when logs are too high on large environments
+nagios_config_gzip_archives: False
+nagios_config_gzip_archives_days: 180  # days older to compress with gzip the file
+nagios_config_archives_dir: "/usr/local/nagios/var/archives"  # location to nagios archives logs
 
 # Default proxy_env
 
