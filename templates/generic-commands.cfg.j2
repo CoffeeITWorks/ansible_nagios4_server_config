@@ -16,12 +16,6 @@ define command{
 }
 
 
-#Check for HTTP with custom Port
-define command{
-	command_name	check_http_custom
-	command_line	/usr/lib/nagios/plugins/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$ -p $ARG1$
-}
-
 #Check VNC service
 define command{
 	command_name	check_tcp_vnc
@@ -71,6 +65,18 @@ define command{
 define command{
 	command_name	check_url_status
 	command_line	/usr/lib/nagios/plugins/check_http -I $HOSTADDRESS$ -p $ARG1$
+}
+
+# pass any arg to check_http
+define command{
+	command_name	check_http_args
+	command_line	/usr/lib/nagios/plugins/check_http $ARG1$
+}
+
+#Check for HTTP with custom Port
+define command{
+	command_name	check_http_custom
+	command_line	/usr/lib/nagios/plugins/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$ -p $ARG1$
 }
 
 # 'check_https' command definition
