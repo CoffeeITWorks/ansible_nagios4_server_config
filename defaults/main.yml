@@ -152,3 +152,17 @@ nagios_a2_ssl_cert_keyfile: /etc/ssl/private/ssl-cert-snakeoil.key
 # Templates configurations
 generic_service_check_interval: 5  # check interval for services template in minutes
 
+nagios_config_generic_host_lines:
+  - 'name                            generic-host    ; The name of this host template'
+  - 'notifications_enabled           1          ; Host notifications are enabled'
+  - 'event_handler_enabled           1          ; Host event handler is enabled'
+  - 'flap_detection_enabled          1          ; Flap detection is enabled'
+  - 'process_perf_data               1          ; Process performance data'
+  - 'retain_status_information       1          ; Retain status information across program restarts'
+  - 'retain_nonstatus_information    1          ; Retain non-status information across program restarts'
+  - 'check_command                   check_icmp'
+  - 'max_check_attempts              2'
+  - 'notification_interval           0'
+  - 'notification_period             24x7'
+  - 'notification_options            d,u,r'
+  - 'contact_groups                  admins'
