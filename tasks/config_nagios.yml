@@ -77,3 +77,16 @@
   copy: src={{ item }} dest="{{ nagios_config_cfg_dir }}/commands_core" owner=www-data mode=655
   with_fileglob:
   - "commands/*"
+  notify: Reload Nagios
+
+- name: config_nagios | template commands to commands_core
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  with_items:
+    - { src: 'commands/commands_nsclientv04.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_nsclientv04.cfg' }  # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'commands/commands_check_nrpe_nsclient.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_check_nrpe_nsclient.cfg' } # to be compatible with nagios4_server_pnp4nagios
+  notify: Reload Nagios

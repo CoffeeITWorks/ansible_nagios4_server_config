@@ -2,5 +2,5 @@
 # !ARG1=Service!ARG2=critical state
 define command{
 	command_name	check_nrpe_check_service_state
-	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p 5666 -t 30 -c check_service -a service="$ARG1$" "crit=state = '$ARG2$'"
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 30 -c check_service -a service="$ARG1$" "crit=state = '$ARG2$'"
 }

@@ -19,6 +19,8 @@ RedHat: Not ready
 Role Variables
 --------------
 
+See all in [defaults/main.yml](defaults/main.yml)
+
 Add to your host_vars or group_vars:
 
 ### Extra Nagios configuration options

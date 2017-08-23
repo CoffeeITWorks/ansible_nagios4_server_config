@@ -1,0 +1,71 @@
+#CheckDriveSize Only clients with NsClient++ 0.3.8 and newer
+define command{
+	command_name	check_nrpe_counter
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 30 -c CheckCounter -a "Counter:$ARG1$=$ARG2$" ShowAll $ARG3$ $ARG4$
+}
+
+define command{
+	command_name	check_nrpe_file_size
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c CheckFileSize -a MinWarn=$ARG1$ MinCrit=$ARG2$ File=$ARG3$
+}
+
+define command{
+	command_name	check_nrpe_checkprocstate
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -c CheckProcState -a ShowAll $ARG1$
+}
+
+define command{
+	command_name	check_nrpe_alldrives_p
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p 9666 -t 20 -c CheckDriveSize -a ShowAll MinWarnFree=$ARG1$ MinCritFree=$ARG2$ CheckAllOthers FilterType=FIXED Drive=P: Drive=Q:
+}
+
+#Agregué $ARG1$ para poder agregar opciones como exclusiones: exclude=wuauserv
+define command{
+	command_name	check_nrpe_allservices
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 20 -c CheckServiceState -a CheckAll $ARG1$
+}
+# check one service: just add Service name to args.
+define command{
+	command_name	check_nrpe_service
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 20 -c CheckServiceState -a $ARG1$
+}
+
+define command{
+	command_name	check_nrpe_checkmem
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -c CheckMEM -a MinWarn=$ARG1$ MinCrit=$ARG2$ ShowAll type=physical
+}
+
+define command{
+	command_name	check_nrpe_alldrives
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 20 -c CheckDriveSize -a MinWarnFree=$ARG1$ MinCritFree=$ARG2$ CheckAllOthers FilterType=FIXED Drive=P: Drive=Q:
+}
+
+#Check for File Age Maximum age crit
+define command{
+    command_name    check_nrpe_file_maxage
+    command_line    /usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 20 -c CheckFile2 -a path=$ARG1$ pattern=$ARG2$ MaxCrit=1 max-dir-depth=3 filter=in "filter+written=$ARG3$" "master-syntax=%matches%"
+}
+
+#Check for File Age MinCrit
+# ARG1=Path to dir
+# ARG2=Patern to search files like *.log
+# ARG3=Filter like \\<3d
+# other example for filter: \\>3m
+
+define command{
+    command_name    check_nrpe_file_minage
+    command_line    /usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 20 -c CheckFile2 -a path=$ARG1$ pattern=$ARG2$ MinCrit=0 max-dir-depth=3 filter=in "filter+written=$ARG3$" "master-syntax=%matches%"
+}
+
+################################### Customized installed scripts #######################################################
+
+define command{
+	command_name	check_nrpe_db_size
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c check_mssql_dbsizes -a $ARG1$ $ARG2$
+}
+
+#CheckDriveSize Only clients with NsClient++ 0.3.8 and newer
+define command{
+	command_name	check_nrpe_windows_time
+	command_line	/usr/lib/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -p {{ nagios_config_commands_nrpe_port }} -t 30 -c check_windows_time -a $ARG1$ $ARG2$ $ARG3$
+}

@@ -166,3 +166,5 @@ nagios_config_generic_host_lines:
   - 'notification_period             24x7'
   - 'notification_options            d,u,r'
   - 'contact_groups                  admins'
+
+nagios_config_commands_nrpe_port: 5666
