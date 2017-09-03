@@ -43,8 +43,16 @@
     - { src: 'hostgroups_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/hostgroups_nagios.cfg' }
     - { src: 'services_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/services_nagios.cfg' }
     - { src: 'templates.cfg.j2', dest: '{{ nagios_etc }}/objects/templates.cfg' }
-    - { src: 'resource.cfg.j2', dest: '{{ nagios_etc }}/resource.cfg' } # To change $USER1$ path
   notify: Reload Nagios
+
+- name:  config_nagios | resource.cfg $USER1$
+  lineinfile: 
+    dest: "{{ nagios_etc }}/resource.cfg" 
+    regexp: '{{ item.src }}' 
+    line: "{{ item.value }}"
+  with_items:
+   - src: '^\$USER1\$='
+     value: "$USER1$={{ nagios_plugins_dir }}"
 
 - name: Configure Generic Nagios host and service
   template:
