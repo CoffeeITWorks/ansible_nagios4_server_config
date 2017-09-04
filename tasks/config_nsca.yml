@@ -7,7 +7,7 @@
         mode={{ item.mode }}
   with_items:
       - { path: '/var/lib/nagios3/rw', mode: 2710 }
-      - { path: '/var/lib/nagios3', mode: 751 }
+      - { path: '/var/lib/nagios3', mode: 0751 }
 
 - name: Configure NSCA
   template: src={{ ansible_distribution_release }}/nsca.cfg.j2
