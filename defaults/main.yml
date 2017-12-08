@@ -57,7 +57,7 @@ nagios_config_admin_email: root@localhost
 nagios_config_admin_pager: pageroot@localhost
 nagios_config_log_rotation_method: h
 
-nagios_check_service_freshness: 0
+nagios_check_service_freshness: 1
 nagios_allow_empty_hostgroup_assignment: 1
 
 # Performance:
