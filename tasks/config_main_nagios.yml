@@ -15,7 +15,7 @@
   copy: src="{{ item }}" dest="{{ nagios_config_cfg_dir }}/plugins" owner=nagios group=nagios mode=655
   with_fileglob:
   - "nagios-plugins-cfg/*"
-  
+
 - name:  config_main_nagios | link nagios4 config
   file: src="{{ item.src }}" dest="{{ item.dest }}" state=link
   with_items:
