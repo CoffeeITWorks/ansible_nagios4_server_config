@@ -87,7 +87,7 @@ nsca_config_pid_file: /var/run/nsca.pid
 nsca_config_server_port: 5667
 nsca_config_server_address: False
 nsca_config_nsca_user: nagios
-nsca_config_nsca_group: nogroup
+nsca_config_nsca_group: nagios
 nsca_config_nsca_chroot: False
 nsca_config_debug: 0
 nsca_config_command_file: "{{ nagios_config_command_file }}"
