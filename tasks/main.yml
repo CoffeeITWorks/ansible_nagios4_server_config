@@ -36,11 +36,3 @@
 - include: config_notifications.yml
 
 - meta: flush_handlers
-
-- name: change {{ nagios_config_command_file }} permissions
-  file:
-    path: "{{ nagios_config_command_file }}"
-    state: 'present'
-    mode: '0660'
-    owner: 'nagios'
-    group: 'nagcmd'
