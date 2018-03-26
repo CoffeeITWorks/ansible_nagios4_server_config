@@ -4,6 +4,7 @@
   service:
     name: "{{ nagios_service }}"
     state: reloaded
+  notify: Restart Nagios  # Restart nagios after reload avoids bug that hang some command process
 
 - name: Restart Nagios
   service:
