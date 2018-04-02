@@ -73,6 +73,10 @@
   copy: 'src=plugins/ dest=/usr/lib/nagios/plugins/ owner=root group=root mode=0755'
 
 - name:  config_main_nagios | lineinfile - configure sudoers to allow check_linux_stats.pl permissions
-  lineinfile: "dest={{ sudoers_file }} regexp='{{ item.src }}' line='{{ item.value }}'"
+  lineinfile: 
+    path: "{{ sudoers_file }}" 
+    regexp: "{{ item.src }}"
+    line: "{{ item.value }}"
+    validate: '/usr/sbin/visudo -cf %s'
   with_items:
     - { src: "^nagios ALL=" , value: "nagios ALL=(root) NOPASSWD:/usr/lib/nagios/plugins/check_linux_stats.pl" }
