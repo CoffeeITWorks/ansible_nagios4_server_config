@@ -1,12 +1,19 @@
 ---
 # file: tasks/nagios_cron.yml
 
+- name: prepare archive dir for compressed files
+  file:
+    path: "{{ nagios_config_archives_dir_compressed }}"
+    state: directory
+    owner: nagios
+    group: nagios
+
 ### CRON CONFIGURATION ###
 
 - name:  "nagios_cron | gzip nagios archive files older than {{ nagios_config_gzip_archives_days }}"
   cron: 
     name: "gzip archive files old"
-    job: "find {{ nagios_config_archives_dir }} -name *.log -mtime +{{ nagios_config_gzip_archives_days }} -execdir gzip {} +"
+    job: 'find {{ nagios_config_archives_dir }} -name *.log -mtime +{{ nagios_config_gzip_archives_days }} -type f -print0 | tar --remove-files -cvjf "{{ nagios_config_archives_dir_compressed }}/$(date --utc +"%Y%m%dT%H%M")_logs.tar.bz2" --null -T -'
     user: root
     cron_file: "nagios_cron"
     weekday: "*"

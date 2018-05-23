@@ -28,6 +28,7 @@ nagios_cgi_authorized_for_read_only: False
 nagios_config_gzip_archives: False
 nagios_config_gzip_archives_days: 180  # days older to compress with gzip the file
 nagios_config_archives_dir: "/usr/local/nagios/var/archives"  # location to nagios archives logs
+nagios_config_archives_dir_compressed: "/usr/local/nagios/var/archives_comp"  # location to nagios archives logs compressed
 
 # Default proxy_env
 
