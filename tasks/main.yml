@@ -34,5 +34,3 @@
     - config_nagios_cron
 
 - include: config_notifications.yml
-
-- meta: flush_handlers
