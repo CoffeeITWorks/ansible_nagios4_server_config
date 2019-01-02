@@ -1,0 +1,15 @@
+---
+
+nagios_packages:
+  - nsca
+  - python-passlib  # Required for the htpasswd Ansible module
+  - nagios-nrpe-plugin
+  - libswitch-perl
+  - rrdtool
+  - librrds-perl
+  - libwww-perl
+  - libjson-perl
+  - nagios-plugins-extra
+  - nagios-plugins-contrib
+  - nagios-plugin-check-multi
+  - libsys-statistics-linux-perl # For check_linux_stats.pl

@@ -28,14 +28,14 @@ nagios_packages:
 
 sudoers_file: '/etc/sudoers'
 
-nagios_etc: '/etc/nagios'
-nagios_config_cfg_dir: "{{ nagios_etc }}/objects"
+nagios_etc: '/usr/local/nagios/etc'
+nagios_config_cfg_dir: "{{ nagios_etc }}/conf.d"
+nagios_plugins_dir: '/usr/lib/nagios/plugins/'
 
-# --- still requires work:
-nagios_version: 3
-nagios_service: nagios3
-nagios_config_file: /etc/nagios/nagios.cfg
-nagios_cgi_file: /etc/nagios/cgi.cfg
+nagios_version: 4
+nagios_service: nagios
+nagios_config_file: "{{ nagios_etc }}/nagios.cfg"
+nagios_cgi_file: "{{ nagios_etc }}/cgi.cfg"
 nsca_config_file: /etc/nsca.cfg
 nsca_service: nsca
 
