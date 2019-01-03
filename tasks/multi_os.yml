@@ -12,4 +12,4 @@
 
 - name: Include Distribution version specific variables for major_version
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-  skip: true
+  ignore_errors: yes
