@@ -12,6 +12,7 @@ galaxy_info:
     - xenial
     - bionic
   - name: Centos
+    versions:
     - 7
   galaxy_tags:
   - Monitoring
