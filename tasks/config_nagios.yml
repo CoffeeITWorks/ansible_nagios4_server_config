@@ -35,7 +35,7 @@
     dest: '{{ item.dest }}'
     owner: 'root'
     group: 'root'
-    mode: u=rw,g=r,o=r
+    mode: 'u=rw,g=r,o=r'
   with_items:
     - { src: 'extra-commands.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/extra-commands.cfg' }
     - { src: 'generic-commands.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-commands.cfg' }
@@ -81,10 +81,10 @@
   notify: Reload Apache
 
 - name: create commands_core dir
-  file: 'path={{ nagios_config_cfg_dir }}/commands_core owner=root group=root mode=755 state=directory'
+  file: 'path={{ nagios_config_cfg_dir }}/commands_core owner=root group=root mode="u+rwx,g+rwx,o+rx" state=directory'
 
 - name: config_nagios | copy commands to commands_core
-  copy: src={{ item }} dest="{{ nagios_config_cfg_dir }}/commands_core" owner="{{ apache_user }}" mode=655
+  copy: src={{ item }} dest="{{ nagios_config_cfg_dir }}/commands_core" owner="{{ apache_user }}" mode="u=rwx,g=rwx,o=rx"
   with_fileglob:
   - "commands/*"
   notify: Reload Nagios

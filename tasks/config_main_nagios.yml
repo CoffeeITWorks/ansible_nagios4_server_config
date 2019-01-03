@@ -2,17 +2,22 @@
 # file: tasks/config_main_nagios.yml
 
 - name: config_main_nagios | ensure conf.d exists
-  file: path="{{ nagios_config_cfg_dir }}" state='directory' mode='775' owner='nagios' group='nagios'
+  file: path="{{ nagios_config_cfg_dir }}" state='directory' mode='u=rwx,g=rwx,o=rx' owner='nagios' group='nagios'
 
 - name: config_main_nagios | ensure conf.d/nagios-plugins does not exists
   file: path="{{ nagios_config_cfg_dir }}/nagios-plugins" state='absent'
 
 # copy commands for debian based distro
 - name: config_main_nagios | ensure conf.d/plugins exists
-  file: path="{{ nagios_config_cfg_dir }}/plugins" state='directory' mode='775' owner='nagios' group='nagios'
+  file: 
+    path: "{{ nagios_config_cfg_dir }}/plugins" 
+    state: 'directory' 
+    mode: 'u=rwx,g=rwx,o=rx' 
+    owner: 'nagios' 
+    group: 'nagios'
 
 - name: config_main_nagios | copy plugins-cfg
-  copy: src="{{ item }}" dest="{{ nagios_config_cfg_dir }}/plugins" owner=nagios group=nagios mode=655
+  copy: src="{{ item }}" dest="{{ nagios_config_cfg_dir }}/plugins" owner=nagios group=nagios mode=u+rwx,g+rx,o+rx
   with_fileglob:
   - "nagios-plugins-cfg/*"
 
@@ -77,7 +82,7 @@
   with_items: "{{ nagios_config_perf_options }}"
 
 - name:  config_main_nagios | Install Plugins
-  copy: 'src=plugins/ dest={{ nagios_plugins_dir }} owner=root group=root mode=0755'
+  copy: 'src=plugins/ dest={{ nagios_plugins_dir }} owner=root group=root mode=u+rwx,g+rx,o+rx'
 
 - name:  config_main_nagios | lineinfile - configure sudoers to allow check_linux_stats.pl permissions
   lineinfile:
