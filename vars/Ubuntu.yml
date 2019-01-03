@@ -18,6 +18,7 @@ nagios_packages:
   - libsys-statistics-linux-perl # For check_linux_stats.pl
 
 apache_user: 'www-data'
+apache_service: 'apache2'
 
 sudoers_file: '/etc/sudoers'
 

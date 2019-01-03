@@ -24,6 +24,7 @@ nagios_packages:
   - rrdtool-perl
 
 apache_user: 'apache'
+apache_service: 'httpd'
 
 sudoers_file: '/etc/sudoers'
 
