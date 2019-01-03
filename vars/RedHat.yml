@@ -19,6 +19,7 @@ nagios_packages:
 #  - apache2-mpm-prefork
 #  - nagios-doc
   - nagios-plugins-nrpe
+  - nagios-plugins-all
   - perl-Switch
   - rrdtool-perl
 
