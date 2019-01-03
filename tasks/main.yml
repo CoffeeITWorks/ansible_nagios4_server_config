@@ -6,6 +6,11 @@
     - config_nagios
     - nagios_server_main_config
 
+- name: include epel on Centos/RedHat
+  include_role:
+    name: geerlingguy.repo-epel
+  when: ansible_distribution == 'RedHat'
+
 # Installs packages in any platform and adds environment DEBIAN_FRONTEND for debian based os.
 # DEBIAN_FRONTEND helps on ensuring not interactive in this case.
 - stat: path="{{ nagios_config_file }}"

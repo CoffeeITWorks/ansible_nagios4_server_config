@@ -5,26 +5,22 @@
 
 nagios_packages:
   - httpd
-  - nagios
-  - nagios-plugins-all
-  - nagios-common
-  - nagios-devel
   - libselinux-python
   - nsca # requires epel
   - python-passlib  # Required for the htpasswd Ansible module
   - rrdtool
   - php-gd
   - perl-libwww-perl
-  - perl-json
+  - perl-JSON
   - php
   - php-xml
   - php-mysql
-  - libsys-statistics-linux-perl # For check_linux_stats.pl
+  - perl-Sys-Statistics-Linux # For check_linux_stats.pl
 #  - apache2-mpm-prefork
 #  - nagios-doc
-#  - nagios-nrpe-plugin
-#  - libswitch-perl
-#  - librrds-perl
+  - nagios-plugins-nrpe
+  - perl-Switch
+  - rrdtool-perl
 
 sudoers_file: '/etc/sudoers'
 
