@@ -1,7 +1,7 @@
 define service {
     host_name               localhost
     service_description     Check if Apache2 is running
-    check_command           check_linux_process_local!314572800!536870912!/var/run/apache2/apache2.pid
+    check_command           check_linux_process_local!314572800!536870912!/var/run/{{ apache_service }}/{{ apache_service }}.pid
     use                     generic-service
 }
 

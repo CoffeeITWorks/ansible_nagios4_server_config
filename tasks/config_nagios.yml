@@ -26,7 +26,7 @@
   notify: Reload Nagios
 
 - name: Allow icmp to run with nagios user
-  file: 'path=/usr/lib/nagios/plugins/check_icmp mode="u+rws,g+rx,o+rx"'
+  file: 'path={{ nagios_plugins_dir }}/check_icmp mode="u+rws,g+rx,o+rx"'
   notify: Reload Nagios
 
 - name: Configure Generic Nagios stuff
@@ -82,7 +82,7 @@
   file: 'path={{ nagios_config_cfg_dir }}/commands_core owner=root group=root mode=755 state=directory'
 
 - name: config_nagios | copy commands to commands_core
-  copy: src={{ item }} dest="{{ nagios_config_cfg_dir }}/commands_core" owner=www-data mode=655
+  copy: src={{ item }} dest="{{ nagios_config_cfg_dir }}/commands_core" owner="{{ apache_user }}" mode=655
   with_fileglob:
   - "commands/*"
   notify: Reload Nagios

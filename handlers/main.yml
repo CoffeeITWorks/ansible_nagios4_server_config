@@ -17,10 +17,16 @@
     state: reloaded
 
 - name: Restart Apache
-  service: name=apache2 state=restarted
+  service: 
+    name: "{{ apache_service }}"
+    state: restarted
 
 - name: Reload Apache
-  service: name=apache2 state=reloaded
+  service: 
+    name: "{{ apache_service }}"
+    state: reloaded
 
 - name: Restart NPCD
-  service: name=npcd state=restarted
+  service: 
+    name: npcd 
+    state: restarted

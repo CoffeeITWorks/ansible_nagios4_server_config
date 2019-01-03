@@ -9,3 +9,7 @@
     - "../vars/{{ ansible_distribution }}.yml"
     - "../vars/{{ ansible_os_family }}.yml"
     - "../vars/defaults.yml"
+
+- name: Include Distribution version specific variables for major_version
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  ignore_errors: yes

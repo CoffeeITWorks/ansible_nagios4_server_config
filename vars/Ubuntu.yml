@@ -10,13 +10,15 @@ nagios_packages:
   - libswitch-perl
   - rrdtool
   - librrds-perl
-  - php5-gd
   - libwww-perl
   - libjson-perl
   - nagios-plugins-extra
   - nagios-plugins-contrib
   - nagios-plugin-check-multi
   - libsys-statistics-linux-perl # For check_linux_stats.pl
+
+apache_user: 'www-data'
+apache_service: 'apache2'
 
 sudoers_file: '/etc/sudoers'
 
@@ -30,6 +32,5 @@ nagios_config_file: "{{ nagios_etc }}/nagios.cfg"
 nagios_cgi_file: "{{ nagios_etc }}/cgi.cfg"
 nsca_config_file: /etc/nsca.cfg
 nsca_service: nsca
-npcd_service: npcd
 
 nagios_config_command_file: /usr/local/nagios/var/rw/nagios.cmd
