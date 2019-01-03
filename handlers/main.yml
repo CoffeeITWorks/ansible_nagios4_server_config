@@ -21,7 +21,7 @@
     name: "{{ apache_service }}"
     state: restarted
 
-- name: Restart Apache
+- name: Reload Apache
   service: 
     name: "{{ apache_service }}"
     state: reloaded
