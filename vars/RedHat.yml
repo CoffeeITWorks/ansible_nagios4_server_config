@@ -23,6 +23,8 @@ nagios_packages:
   - perl-Switch
   - rrdtool-perl
 
+apache_user: 'apache'
+
 sudoers_file: '/etc/sudoers'
 
 nagios_etc: '/usr/local/nagios/etc'

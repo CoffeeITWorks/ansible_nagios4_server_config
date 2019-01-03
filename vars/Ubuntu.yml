@@ -17,6 +17,8 @@ nagios_packages:
   - nagios-plugin-check-multi
   - libsys-statistics-linux-perl # For check_linux_stats.pl
 
+apache_user: 'www-data'
+
 sudoers_file: '/etc/sudoers'
 
 nagios_etc: '/usr/local/nagios/etc'
