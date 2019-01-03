@@ -26,7 +26,7 @@
   notify: Reload Nagios
 
 - name: Allow icmp to run with nagios user
-  file: 'path=/usr/lib/nagios/plugins/check_icmp mode="u+rws,g+rx,o+rx"'
+  file: 'path={{ nagios_plugins_dir }}/check_icmp mode="u+rws,g+rx,o+rx"'
   notify: Reload Nagios
 
 - name: Configure Generic Nagios stuff
