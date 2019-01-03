@@ -10,6 +10,9 @@ galaxy_info:
     - trusty
     - vivid
     - xenial
+    - bionic
+  - name: Centos
+    - 7
   galaxy_tags:
   - Monitoring
   - Infraestructure
