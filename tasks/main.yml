@@ -11,17 +11,22 @@
     name: geerlingguy.repo-epel
   when: ansible_distribution == 'RedHat'
 
-# Installs packages in any platform and adds environment DEBIAN_FRONTEND for debian based os.
-# DEBIAN_FRONTEND helps on ensuring not interactive in this case.
-- stat: path="{{ nagios_config_file }}"
+- name: Register var with stat nagios config file
+  stat: path="{{ nagios_config_file }}"
   register: nagiosconfigfile
 
 - name: main | update apt cache for ubuntu
   apt: update_cache=yes
+  retries: 2
+  delay: 2
   when: ansible_distribution == 'Ubuntu' and not nagiosconfigfile.stat.exists
 
+# Installs packages in any platform and adds environment DEBIAN_FRONTEND for debian based os.
+# DEBIAN_FRONTEND helps on ensuring not interactive in this case.
 - name: main | install packages
   package: name={{ nagios_packages| join(',') }} state=present
+  retries: 2
+  delay: 2
   environment:
     DEBIAN_FRONTEND: noninteractive
 

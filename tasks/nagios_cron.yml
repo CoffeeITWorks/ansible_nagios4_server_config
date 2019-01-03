@@ -11,7 +11,7 @@
 ### CRON CONFIGURATION ###
 
 - name:  "nagios_cron | gzip nagios archive files older than {{ nagios_config_gzip_archives_days }}"
-  cron: 
+  cron:
     name: "gzip archive files old"
     job: 'find {{ nagios_config_archives_dir }} -name *.log -mtime +{{ nagios_config_gzip_archives_days }} -type f -print0 | tar --remove-files -cvjf "{{ nagios_config_archives_dir_compressed }}/$(date --utc +"%Y%m%dT%H%M")_logs.tar.bz2" --null -T -'
     user: root

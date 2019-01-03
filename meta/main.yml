@@ -1,7 +1,8 @@
 ---
 galaxy_info:
   author: Diego Daguerre, Pablo Estigarribia
-  description: Configure nagios, prepared to be compatible with thruk, pnp4nagios, nagios_plugins. Has feature to clone nagios config from git repos.
+  description: "Configure nagios, prepared to be compatible with thruk, pnp4nagios, 
+  nagios_plugins. Has feature to clone nagios config from git repos."
   license: GPLv2
   min_ansible_version: 2.0
   platforms:
@@ -11,11 +12,11 @@ galaxy_info:
     - vivid
     - xenial
     - bionic
-  - name: Centos
+  - name: EL
     versions:
     - 7
   galaxy_tags:
-  - Monitoring
-  - Infraestructure
+  - monitoring
+  - infraestructure
 #dependencies:
 #ansible-role-nagios

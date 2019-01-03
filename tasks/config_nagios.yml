@@ -46,9 +46,9 @@
   notify: Reload Nagios
 
 - name:  config_nagios | resource.cfg $USER1$
-  lineinfile: 
-    dest: "{{ nagios_etc }}/resource.cfg" 
-    regexp: '{{ item.src }}' 
+  lineinfile:
+    dest: "{{ nagios_etc }}/resource.cfg"
+    regexp: '{{ item.src }}'
     line: "{{ item.value }}"
   with_items:
    - src: '^\$USER1\$='
@@ -62,8 +62,10 @@
     group: 'root'
     mode: 0644
   with_items:
-    - { src: 'generic-host_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-host_nagios.cfg' }  # to be compatible with nagios4_server_pnp4nagios
-    - { src: 'generic-service_nagios.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-service_nagios.cfg' } # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'generic-host_nagios.cfg.j2', 
+    dest: '{{ nagios_config_cfg_dir }}/generic-host_nagios.cfg' }  # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'generic-service_nagios.cfg.j2', 
+    dest: '{{ nagios_config_cfg_dir }}/generic-service_nagios.cfg' } # to be compatible with nagios4_server_pnp4nagios
   notify: Reload Nagios
   when: nagios_config_configure_generic_host_service | bool
 
@@ -95,6 +97,8 @@
     group: 'root'
     mode: 0644
   with_items:
-    - { src: 'commands/commands_nsclientv04.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_nsclientv04.cfg' }  # to be compatible with nagios4_server_pnp4nagios
-    - { src: 'commands/commands_check_nrpe_nsclient.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_check_nrpe_nsclient.cfg' } # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'commands/commands_nsclientv04.cfg.j2', 
+    dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_nsclientv04.cfg' }  # to be compatible with nagios4_server_pnp4nagios
+    - { src: 'commands/commands_check_nrpe_nsclient.cfg.j2', 
+    dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_check_nrpe_nsclient.cfg' } # to be compatible with nagios4_server_pnp4nagios
   notify: Reload Nagios

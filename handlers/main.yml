@@ -10,23 +10,23 @@
   service:
     name: "{{ nagios_service }}"
     state: restarted
-  
+
 - name: Reload NSCA
   service:
     name: "{{ nsca_service }}"
     state: reloaded
 
 - name: Restart Apache
-  service: 
+  service:
     name: "{{ apache_service }}"
     state: restarted
 
 - name: Reload Apache
-  service: 
+  service:
     name: "{{ apache_service }}"
     state: reloaded
 
 - name: Restart NPCD
-  service: 
-    name: npcd 
+  service:
+    name: npcd
     state: restarted
