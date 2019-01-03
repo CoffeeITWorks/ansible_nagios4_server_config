@@ -35,7 +35,7 @@
     dest: '{{ item.dest }}'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: u=rw,g=r,o=r
   with_items:
     - { src: 'extra-commands.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/extra-commands.cfg' }
     - { src: 'generic-commands.cfg.j2', dest: '{{ nagios_config_cfg_dir }}/generic-commands.cfg' }
@@ -60,7 +60,7 @@
     dest: '{{ item.dest }}'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: u=rw,g=r,o=r
   with_items:
     - { src: 'generic-host_nagios.cfg.j2',
     dest: '{{ nagios_config_cfg_dir }}/generic-host_nagios.cfg' }  # to be compatible with nagios4_server_pnp4nagios
@@ -75,7 +75,7 @@
     dest: '{{ item.dest }}'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: u=rw,g=r,o=r
   with_items:
     - { src: 'cgi.cfg.j2', dest: '{{ nagios_etc }}/cgi.cfg' } # Modify permissions and other web options
   notify: Reload Apache
@@ -95,7 +95,7 @@
     dest: '{{ item.dest }}'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: u=rw,g=r,o=r
   with_items:
     - { src: 'commands/commands_nsclientv04.cfg.j2',
     dest: '{{ nagios_config_cfg_dir }}/commands_core/commands_nsclientv04.cfg' } # to be compatible with nagios4_server_pnp4nagios

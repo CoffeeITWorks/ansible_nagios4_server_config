@@ -9,5 +9,5 @@
     dest: '{{ nagios_config_cfg_dir }}/generic-notifications.cfg'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: u=rw,g=r,o=r
   when: nagios_config_configure_notifications_command | bool
