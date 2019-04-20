@@ -1,24 +1,8 @@
-define service {
-    host_name               localhost
-    service_description     Check if Apache2 is running
-    check_command           check_linux_process_local!471859200!629145600!/var/run/{{ apache_service }}/{{ apache_service }}.pid
-    use                     generic-service
-}
 
-define service {
-    host_name               localhost
-    service_description     Check if Nagios is running
-    check_command           check_linux_process_local!3221225472!3758096384!/usr/local/nagios/var/nagios.lock
-    notes                   Warn if nagios uses 3Gb of RAM. CRIT 3.5Gb of RAM
-    use                     generic-service
-}
+{% for l in nagios_localhost_services %}
+{{ l }}
+{% endfor %}
 
-define service {
-    host_name               localhost
-    service_description     check_nsca_service_running
-    check_command           check_linux_process_local!314572800!536870912!/var/run/nsca.pid
-    use                     generic-service
-}
 
 # Define a service to check the disk space of the root partition
 # on the local machine.  Warning if < 20% free, critical if
