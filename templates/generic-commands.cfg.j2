@@ -7,7 +7,7 @@
 
 define command{
     command_name    check_linux_process_local
-    command_line    sudo /usr/lib/nagios/plugins/check_linux_stats.pl -T -w $ARG1$ -c $ARG2$ -p $ARG3$
+    command_line    sudo /usr/bin/perl /usr/lib/nagios/plugins/check_linux_stats.pl -T -w $ARG1$ -c $ARG2$ -p $ARG3$
 }
 
 define command{
