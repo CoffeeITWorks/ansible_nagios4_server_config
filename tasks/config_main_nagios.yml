@@ -91,4 +91,4 @@
     line: "{{ item.value }}"
     validate: '/usr/sbin/visudo -cf %s'
   with_items:
-    - { src: "^nagios ALL=", value: "nagios ALL=(root) NOPASSWD:{{ nagios_plugins_dir }}check_linux_stats.pl" }
+    - { src: "^nagios ALL=", value: "nagios ALL=(root) NOPASSWD:/usr/bin/perl {{ nagios_plugins_dir }}/check_linux_stats.pl *" }
