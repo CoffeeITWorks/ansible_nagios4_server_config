@@ -82,7 +82,7 @@
   with_items: "{{ nagios_config_perf_options }}"
 
 - name:  config_main_nagios | Install Plugins
-  copy: 'src=plugins/ dest={{ nagios_plugins_dir }} owner=root group=root mode=u+rwx,g+rx,o+rx'
+  copy: 'src=plugins/ dest={{ nagios_plugins_dir }}/ owner=root group=root mode=u+rwx,g+rx,o+rx'
 
 - name:  config_main_nagios | lineinfile - configure sudoers to allow check_linux_stats.pl permissions
   lineinfile:
