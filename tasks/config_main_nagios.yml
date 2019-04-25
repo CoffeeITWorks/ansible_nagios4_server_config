@@ -86,7 +86,7 @@
 
 - name:  config_main_nagios | lineinfile - configure sudoers to allow check_linux_stats.pl permissions
   lineinfile:
-    path: "{{ common_sudoers_file }}"
+    path: "{{ sudoers_file }}"
     regexp: '{{ item.src }}'
     line: '{{ item.value }}'
     validate: '/usr/sbin/visudo -cf %s'
