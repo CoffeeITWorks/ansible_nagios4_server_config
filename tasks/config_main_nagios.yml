@@ -82,13 +82,16 @@
   with_items: "{{ nagios_config_perf_options }}"
 
 - name:  config_main_nagios | Install Plugins
-  copy: 'src=plugins/ dest={{ nagios_plugins_dir }} owner=root group=root mode=u+rwx,g+rx,o+rx'
+  copy: 'src=plugins/ dest={{ nagios_plugins_dir }}/ owner=root group=root mode=u+rwx,g+rx,o+rx'
 
 - name:  config_main_nagios | lineinfile - configure sudoers to allow check_linux_stats.pl permissions
   lineinfile:
     path: "{{ sudoers_file }}"
-    regexp: "{{ item.src }}"
-    line: "{{ item.value }}"
+    regexp: '{{ item.src }}'
+    line: '{{ item.value }}'
     validate: '/usr/sbin/visudo -cf %s'
   with_items:
-    - { src: "^nagios ALL=", value: "nagios ALL=(root) NOPASSWD:{{ nagios_plugins_dir }}check_linux_stats.pl" }
+    - src: '^nagios ALL=[(]root[)] NOPASSWD\:/usr/bin/perl /usr/lib/nagios/plugins/check_linux_stats.pl'
+      value: 'nagios ALL=(root) NOPASSWD:/usr/bin/perl /usr/lib/nagios/plugins/check_linux_stats.pl *'
+    - src: '^nagios ALL=[(]root[)] NOPASSWD\:/usr/lib/nagios/plugins/check_disk'
+      value: 'nagios ALL=(root) NOPASSWD:/usr/lib/nagios/plugins/check_disk'
