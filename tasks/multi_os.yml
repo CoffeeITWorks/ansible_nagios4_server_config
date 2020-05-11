@@ -16,5 +16,3 @@
     - files:
         - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
       skip: true
-
-

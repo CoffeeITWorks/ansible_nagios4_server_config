@@ -1,5 +1,5 @@
 #::::::::::::::
-# Ubuntu.yml
+# Debian.yml
 #::::::::::::::
 ---
 
@@ -12,7 +12,7 @@ nagios_packages:
   - librrds-perl
   - libwww-perl
   - libjson-perl
-  - nagios-plugins-extra
+  - monitoring-plugins
   - nagios-plugins-contrib
   - nagios-plugin-check-multi
   - libsys-statistics-linux-perl # For check_linux_stats.pl
