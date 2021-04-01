@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Diego Daguerre, Pablo Estigarribia
+  author: coffeeitworks
   description: "Configure nagios, prepared to be compatible with thruk, pnp4nagios,
   nagios_plugins. Has feature to clone nagios config from git repos."
   license: GPLv2
