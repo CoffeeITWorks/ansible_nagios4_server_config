@@ -2,6 +2,8 @@
 # file: tasks/config_nagios.yml
 
 # Only config for normal operation
+# TODO: This playbook already does too many things, probably we need to split part of it into another role
+# If split for example the clone of config, we can reause these parts in naemon or other nagios-compatible core
 
 - name: Clone configuration directories (Git)
   git:  repo="{{ item.repo }}"
