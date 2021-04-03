@@ -5,17 +5,16 @@
 
 nagios_packages:
   - httpd
-  - python3-libsemanage
-  # - python3-libselinux # Already installed by dependent role
+  - libselinux-python
   - nsca # requires epel
-  # - python3-passlib  # Required for the htpasswd Ansible module, already installed by dependent role
+  - python-passlib  # Required for the htpasswd Ansible module
   - rrdtool
   - php-gd
   - perl-libwww-perl
   - perl-JSON
   - php
   - php-xml
-  - php-mysqlnd
+  - php-mysql
   - perl-Sys-Statistics-Linux # For check_linux_stats.pl
 #  - apache2-mpm-prefork
 #  - nagios-doc
