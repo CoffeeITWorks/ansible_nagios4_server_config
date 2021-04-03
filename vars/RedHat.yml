@@ -15,7 +15,7 @@ nagios_packages:
   - perl-JSON
   - php
   - php-xml
-  - php-mysql
+  - php-mysqlnd
   - perl-Sys-Statistics-Linux # For check_linux_stats.pl
 #  - apache2-mpm-prefork
 #  - nagios-doc
