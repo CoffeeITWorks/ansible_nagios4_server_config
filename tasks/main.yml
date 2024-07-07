@@ -1,7 +1,7 @@
 ---
 # file: tasks/main.yml
 
-- include: multi_os.yml
+- import_tasks: multi_os.yml
   tags:
     - config_nagios
     - nagios_server_main_config
@@ -30,17 +30,17 @@
   environment:
     DEBIAN_FRONTEND: noninteractive
 
-- include: config_main_nagios.yml
+- import_tasks: config_main_nagios.yml
 
 # For generic operation
-- include: config_nagios.yml
+- import_tasks: config_nagios.yml
   tags:
     - config_nagios
 
-- include: config_nsca.yml
+- import_tasks: config_nsca.yml
 
-- include: nagios_cron.yml
+- import_tasks: nagios_cron.yml
   tags:
     - config_nagios_cron
 
-- include: config_notifications.yml
+- import_tasks: config_notifications.yml
